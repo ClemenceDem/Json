@@ -18,7 +18,7 @@ public class ConvertJsonToJvaObject {
 	
 	try {
 		// create java object from json file using gson
-		person = gson.fromJson(new FileReader("src/main/java/person.json"), Person.class);
+		person = gson.fromJson(new FileReader("Person.json"), Person.class);
 	} catch (JsonSyntaxException e) {
 		e.printStackTrace();
 	} catch (JsonIOException e) {
@@ -27,6 +27,7 @@ public class ConvertJsonToJvaObject {
 		e.printStackTrace();
 	}
 	
+	System.out.println("Test");
 	System.out.println(person.getCity());	
 
 	}
