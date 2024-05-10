@@ -8,6 +8,8 @@ public class Person {
 	private	String city ;
 	private	String address;
 	private	int postalcode;
+	private boolean args;
+	
 	
 	
 	
