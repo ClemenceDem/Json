@@ -1,44 +1,55 @@
 package com.adesso.insurance.maven;
 
+
+import org.apache.commons.cli.*;
+
 public class CommandLineArgument {
 	
+	// definiere eine leere Kollektion von Options
+	static Options options = new Options();
 	
-	public static void arrayLength(String[] args) {
+	// Erstellung eines option Objekts
+	static Option ALPHA = new Option("s", "start", true, "dient dazu die App zu starten");
 
-		// wenn die länge ungleich 3 ist
-		if (args.length != 3) {
-			throw new IllegalArgumentException("Ungültige Anzahl von Argumenten");
-		}
-
-		// wenn das erste Argument mit dem in die Konsole eingegebene Wort nicht übereinstimmt
-		if (!args[0].equals("life is beautiful")) {
-			throw new IllegalArgumentException("Argument an dieser Position stimmt nicht überein");
-		}
-
-		// wenn das Ende des Arguments mit dem in die Konsole eingegebene Wort nicht übereinstimmt
-		if (!args[2].endsWith("xx")) {
-		throw new IllegalArgumentException("Das eingegebene Ende stimmt nicht mit dem Wort überein");
-		}
-
-	}
+	 
 	
-	
-	
+    public static void main(String[] args) throws ParseException {
+    	
+		ConvertJsonToJvaObject con = new ConvertJsonToJvaObject();	
 
-	public static void main(String[] args) {
+		// Hinfügen des option Objekts in die Kollektion
+		options.addOption(ALPHA);
+
+		// definiere von parser
+		CommandLine cmd;
+		CommandLineParser parser = new DefaultParser();
+		HelpFormatter helper = new HelpFormatter();
+
 		try {
-			// Wenn die Argumente gültig sind, führe hier die Anwendungslogik aus
-			arrayLength(args);
+			cmd = parser.parse(options, args);
+			String pathfile = null;
 
-			System.out.println("Anwendung gestartet mit den Argumenten: " + String.join(", ", args));
+			if (cmd.hasOption("start")) {
+				// get Argument des option Objekts
+				pathfile = cmd.getOptionValue(ALPHA);
+				System.out.println("Pfad der json Datei : " + pathfile);
+				System.out.println();
+			}
+			
+			// return value of city from the json file
+			con.getJavaObject(pathfile);
 
-		} catch (IllegalArgumentException e) {
-
-			// Wenn die Argumente ungültig sind, fange die Exception ab und gib eine
-			// Fehlermeldung aus
-
-			System.err.println("Fehler beim Starten der Anwendung: " + e.getMessage());
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+			helper.printHelp("Usage : ", options);
+			System.exit(0);
+		} catch (NullPointerException e) {
+			System.out.println("Das Attribut pathfile ist möglicherweise an dieser Stelle noch null");
+			System.exit(0);
 		}
 	}
 
 }
+
+
+    
