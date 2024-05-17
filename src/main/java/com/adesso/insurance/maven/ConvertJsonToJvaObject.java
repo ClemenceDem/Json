@@ -1,6 +1,8 @@
 package com.adesso.insurance.maven;
 
 import java.io.FileNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.FileReader;
 
 import com.google.gson.Gson;
@@ -8,15 +10,18 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 public class ConvertJsonToJvaObject {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MyAppLogger.class);
 
-	public void getJavaObject(String file) {
+
+	public void getJavaObject(String pathfile) {
 
 		Gson gson = new Gson();
 		Person person = null;
 
 		try {
 			// create java object from json file using gson
-			person = gson.fromJson(new FileReader(file), Person.class);
+			person = gson.fromJson(new FileReader(pathfile), Person.class);
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
 		} catch (JsonIOException e) {
@@ -25,8 +30,8 @@ public class ConvertJsonToJvaObject {
 			e.printStackTrace();
 		}
 
-		System.out.print("Das Attribut City aus der json Datei has das Werte : ");
-		System.out.println(person.getCity());
+		logger.info("Das Attribut City aus der json Datei has das Werte : "+person.getCity());
+		
 
 	}
 			 
