@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class OptionValiedierung {
 
-	private static final Logger logger = LoggerFactory.getLogger(MyAppLogger.class);
+	private static final Logger logger = LoggerFactory.getLogger(OptionValiedierung.class);
 	private static final String PARAM_START = "start";
 	private static final String PARAM_STARTS = "s";
 	private static String pathfile = null;
@@ -42,7 +42,7 @@ public class OptionValiedierung {
 				System.out.println();
 			}
 
-			logger.info("Pfad der json Datei ist : "+pathfile);
+			logger.info("Pfad der json Datei ist : " + pathfile);
 		} catch (ParseException e) {
 			logger.warn(e.getMessage());
 			helper.printHelp("Usage : ", options);
@@ -53,8 +53,6 @@ public class OptionValiedierung {
 		}
 	}
 
-	
-	
 	public String getPathFile() {
 		return pathfile;
 	}
