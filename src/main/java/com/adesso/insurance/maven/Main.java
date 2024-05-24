@@ -1,6 +1,7 @@
 package com.adesso.insurance.maven;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ public class Main {
 
 		OptionValiedierung option = new OptionValiedierung();
 		
-		Person pers = new Person("Demanou", "Clemence", "female", "Braunschweig", "Gleiwitzstrasse", 38124,"1995-02-01");
+		Person pers = new Person("Demanou", "Clemence", "female", "Braunschweig", "Gleiwitzstrasse", 38124);
 
 		// return json string from java Object
 		logger.info(ConvertJavaObjektToJson.getJson(pers));
@@ -25,15 +26,31 @@ public class Main {
 		// return value of city from the json file
 		ConvertJsonToJvaObject.getJavaObject(option.getPathFile());
 
-
-		String date = "1995.02/01";
-		DayMonthYearCalculator.getDayMonthYear(date);
+		String date = "1995/02/01";
+		
+		LocalDate dateFormated = DayMonthYearCalculator.getDayMonthYear(date);
+		
+		DayMonthYearCalculator.getDay(dateFormated);
+		DayMonthYearCalculator.getMonth(dateFormated);
+		DayMonthYearCalculator.getYear(dateFormated);
+		
+		
+		DayMonthYearCalculator.convertDateFormat(date.toString());
+		
+		
+		
+		
+		
+      
+		
     
 
 	}
 
 	
-}
+	}
+
+
 	
 	
 

@@ -23,7 +23,7 @@ public class Person {
 	private String birthDate;
 	
 
-	public Person(String lastname, String firstname, String sex, String city, String address, int postalcode, String birthDate) {
+	public Person(String lastname, String firstname, String sex, String city, String address, int postalcode) {
 
 		this.lastname = lastname;
 		this.firstname = firstname;
@@ -31,7 +31,6 @@ public class Person {
 		this.city = city;
 		this.address = address;
 		this.postalcode = postalcode;
-		this.birthDate = birthDate;
 	}
 
 	 

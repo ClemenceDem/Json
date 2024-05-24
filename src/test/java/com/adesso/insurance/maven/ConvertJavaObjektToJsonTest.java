@@ -9,7 +9,7 @@ public class ConvertJavaObjektToJsonTest {
 	@Test
 	//ConvertJavaObjektToJson
 	public void testGetJson() {
-		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124,"1995-02-01");
+		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124);
 		String json = "{\"lastname\":\"Demanou\",\"firstname\":\"Clemence\",\"sex\":\"Female\",\"city\":\"Braunschweig\",\"address\":\"Gleiwitzstrasse\",\"postalcode\":38124}";
 		
 		assertEquals(ConvertJavaObjektToJson.getJson(pers),json);

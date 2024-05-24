@@ -14,7 +14,7 @@ public class ConvertJsonToJvaObjectTest {
 	//ConvertJsonToJvaObject
 	public void testGetJavaObject() throws JsonProcessingException, IOException   {
 		String pathfile = "Person.json";
-		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124,"1995-02-01");
+		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124);
 		
 		assertEquals(ConvertJsonToJvaObject.getJavaObject(pathfile).getAddress(), pers.getAddress());
 	}
