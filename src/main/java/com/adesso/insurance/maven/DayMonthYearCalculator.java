@@ -17,13 +17,12 @@ public class DayMonthYearCalculator {
 	final static String NEW_FORMAT = "dd/MM/yyyy";
 	
 	 
-	 static ResourceBundle messages = ResourceBundle.getBundle("src/main/resources/config/messages_de.properties");
+	 static ResourceBundle messages = ResourceBundle.getBundle("properties.language", Locale.GERMANY);
+	 
 	
-    public static void setLocale(Locale locale) {
-        messages = ResourceBundle.getBundle("messages", locale);
-    }
+    
 	
-	public static LocalDate getDayMonthYear(String date) {
+	public static LocalDate DayMonthYearValue(String date) {
 
 		if (date.contains(".") || date.contains("/")) {
 			date = date.replaceAll("[./]", "-");
@@ -34,25 +33,25 @@ public class DayMonthYearCalculator {
 		return birthDate;
 	}
 
-	public static void getTag(LocalDate birthDate) {
+	public static void tagValue(LocalDate birthDate) {
 
 		int day = birthDate.getDayOfMonth();
-		String message = messages.getString("tag.message");
-		LOGGER.info("Tag : " +  message ,day);
+		String message = messages.getString("journée");
+		LOGGER.info(message+ " : "+day);
 	}
 
-	public static void getMonth(LocalDate birthDate) {
+	public static void monthValue(LocalDate birthDate) {
 
 		Month month = birthDate.getMonth();
-		String message = messages.getString("month.message");
-		LOGGER.info("Month : " + message, month);
+		String message = messages.getString("mois");
+		LOGGER.info(message+ " : " +month);
 	}
 
-	public static void getYear(LocalDate birthDate) {
+	public static void yearValue(LocalDate birthDate) {
 
 		int year = birthDate.getYear();
-		String message = messages.getString("year.message");
-		LOGGER.info("Year : " + message,  year);
+		String message = messages.getString("année");
+		LOGGER.info(message+ " : " +year);
 	}
 
 	public static void convertDateFormat(String dateStr) {
@@ -69,12 +68,11 @@ public class DayMonthYearCalculator {
 			DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern(NEW_FORMAT);
 			String dateFormated = date.format(outputFormatter);
 
-			String dateFormatted = date.format(outputFormatter);
-            String message = messages.getString("new.date.format");
-			LOGGER.info("New Format of the Date : " + message,  dateFormated);
+            String message = messages.getString("nouveau");
+			LOGGER.info(message+ " : " +dateFormated);
 		} catch (DateTimeParseException e) {
-			String message = messages.getString("date.format.error");
-			LOGGER.error("Invalid date format: " + message,dateStr);
+			String message = messages.getString("ancien");
+			LOGGER.error(message+ " : " +dateStr);
 			
 				   
 		

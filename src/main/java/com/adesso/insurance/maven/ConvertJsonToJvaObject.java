@@ -13,21 +13,16 @@ public class ConvertJsonToJvaObject {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ConvertJsonToJvaObject.class);
 
-	public static Person getJavaObject(String pathfile) throws IOException {
+	public static Person javaObjectValue(String pathfile) throws IOException {
 
 		Gson gson = new Gson();
 		Person person = null;
 
 		try {
 			person = gson.fromJson(new FileReader(pathfile), Person.class);
-		} catch (JsonSyntaxException e) {
-			e.printStackTrace();
-		} catch (JsonIOException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+		} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+			LOGGER.error("error:" + e.getMessage());
+		} 
 		LOGGER.info("Das Attribut City aus der json Datei has das Werte : " + person.getCity());
 
 		return person;
