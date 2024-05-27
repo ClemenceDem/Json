@@ -10,11 +10,11 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 public class ConvertJsonToJvaObject {
-	// create a logger
-	private static final Logger logger = LoggerFactory.getLogger(ConvertJsonToJvaObject.class);
 
-	public static Person getJavaObject(String pathfile) throws IOException  {
-		// create a new Gson object.
+	private static final Logger LOGGER = LoggerFactory.getLogger(ConvertJsonToJvaObject.class);
+
+	public static Person getJavaObject(String pathfile) throws IOException {
+
 		Gson gson = new Gson();
 		Person person = null;
 
@@ -28,7 +28,7 @@ public class ConvertJsonToJvaObject {
 			e.printStackTrace();
 		}
 
-		logger.info("Das Attribut City aus der json Datei has das Werte : " + person.getCity());
+		LOGGER.info("Das Attribut City aus der json Datei has das Werte : " + person.getCity());
 
 		return person;
 	}

@@ -1,4 +1,4 @@
-package com.adesso.insurance.maven;
+/*package com.adesso.insurance.maven;
 
 import java.util.List;
 
@@ -56,3 +56,4 @@ public class PersonDAO {
 
 
 
+*/

@@ -8,54 +8,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Main {
-	private static final Logger logger = LoggerFactory.getLogger(Main.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
 	public static void main(String[] args) throws ParseException, IOException {
 
 		OptionValiedierung option = new OptionValiedierung();
-		
+
 		Person pers = new Person("Demanou", "Clemence", "female", "Braunschweig", "Gleiwitzstrasse", 38124);
 
-		// return json string from java Object
-		logger.info(ConvertJavaObjektToJson.getJson(pers));
-		
-		
-		// Validation of the argument with the option
+		LOGGER.info(ConvertJavaObjektToJson.getJson(pers));
+
 		option.OptionValiedierungsArgument(args);
-		
-		// return value of city from the json file
+
 		ConvertJsonToJvaObject.getJavaObject(option.getPathFile());
 
 		String date = "1995/02/01";
-		
+
 		LocalDate dateFormated = DayMonthYearCalculator.getDayMonthYear(date);
-		
-		DayMonthYearCalculator.getDay(dateFormated);
+
+		DayMonthYearCalculator.getTag(dateFormated);
 		DayMonthYearCalculator.getMonth(dateFormated);
 		DayMonthYearCalculator.getYear(dateFormated);
-		
-		
+
 		DayMonthYearCalculator.convertDateFormat(date.toString());
-		
-		
-		
-		
-		
-      
-		
-    
 
 	}
 
-	
-	}
+}
 
-
-	
-	
-
-    
-       
 /*
  * // Neue Person erstellen PersonDAO personDAO = new PersonDAO();
  * 
