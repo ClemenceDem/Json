@@ -1,47 +1,42 @@
 package com.adesso.insurance.maven;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 
 @Entity
 public class Person {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// IDENTITY = AUTO-INCREMENT
-	// TABLE = CREATE TABLE "hibernate-sequences" for id's
-	// SEQUENCE = use a created sequence
-	// AUTO = choose automatically a strategy: SEQ,TABLE
+	
+	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(Person.class);
 
 	private String lastname;
 	private String firstname;
-	private String sex;
+	private String gender;
 	private String city;
-	private String address;
+	private String street;
 	private String birthDate;
 	private int postalcode;
-	
-	
 
-	public Person(String lastname, String firstname, String sex, String city, String address, int postalcode, String birthDate) throws ParseException {		
+	public Person(String lastname, String firstname, String gender, String city, String street, int postalcode,
+			String birthDate) throws ParseException {
 		this.lastname = lastname;
 		this.firstname = firstname;
-		this.sex = sex;
+		this.gender = gender;
 		this.city = city;
-		this.address = address;
+		this.street = street;
 		this.postalcode = postalcode;
 		this.birthDate = birthDate;
 	}
 
-	 
-    public Person() {}
-    
+	public Person() {
+	}
+
 	public Person(String lastname, String firstname) {
 		this.lastname = lastname;
 		this.firstname = firstname;
@@ -63,12 +58,12 @@ public class Person {
 		this.firstname = firstname;
 	}
 
-	public String getSex() {
-		return sex;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getCity() {
@@ -79,14 +74,13 @@ public class Person {
 		this.city = city;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String street) {
+		this.street = street;
 	}
- 
 
 	public String getBirthDate() {
 		return birthDate;
@@ -95,7 +89,7 @@ public class Person {
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
-	
+
 	public int getPostalcode() {
 		return postalcode;
 	}
@@ -104,6 +98,38 @@ public class Person {
 		this.postalcode = postalcode;
 	}
 
+	@Override
+	public String toString() {
+		return "Person [lastname=" + lastname + ", firstname=" + firstname + ", gender=" + gender + ", city=" + city
+				+ ", street=" + street + ", postalcode=" + postalcode + ", birthDate=" + birthDate + "]";
+	}
+
+	
 	
 
-}
+	public boolean compareTo(Person pers) {
+        if (this == pers) 
+        	return true; // Vérifie si les objets sont identiques
+        if (pers == null || getClass() != pers.getClass())
+        	return false; // Vérifie si l'objet est du même type
+        return getLastname().equals(pers.lastname) &&
+               getFirstname().equals(pers.firstname) &&
+               getGender().equals(pers.gender) &&
+               pers.equals(city) &&
+               pers.equals(street) &&
+               getPostalcode() == postalcode &&
+               pers.equals(postalcode) ;
+    }
+	}
+	
+	
+	        
+	    
+
+		
+	
+
+		 
+	    
+	    
+

@@ -17,7 +17,7 @@ public class ConvertJsonToJvaObjectTest {
 		String pathfile = "Person.json";
 		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124, "1995-02-01");
 		
-		assertEquals(ConvertJsonToJvaObject.javaObjectValue(pathfile).getAddress(), pers.getAddress());
+		assertEquals(ConvertJsonToJvaObject.javaObjectValue(pathfile).getStreet(), pers.getStreet());
 	}
 	
 	

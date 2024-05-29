@@ -1,9 +1,9 @@
 {
 "lastname": "Demanou",
 "firstname": "Clemence",
-"sex": "Female",
+"gender": "Female",
 "city": "Braunschweig",
-"address": "Gleiwitzstrasse",
+"street": "Gleiwitzstrasse",
 "birthDate": "1995-02-01",
 "postalcode": 38124
 
