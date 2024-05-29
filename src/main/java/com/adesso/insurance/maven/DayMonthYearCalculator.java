@@ -36,7 +36,7 @@ public class DayMonthYearCalculator {
 	public static void tagValue(LocalDate birthDate) {
 
 		int day = birthDate.getDayOfMonth();
-		String message = messages.getString("journée");
+		String message = messages.getString("jour");
 		LOGGER.info(message+ " : "+day);
 	}
 

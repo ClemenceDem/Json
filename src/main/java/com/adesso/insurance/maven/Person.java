@@ -1,5 +1,10 @@
 package com.adesso.insurance.maven;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,18 +24,19 @@ public class Person {
 	private String sex;
 	private String city;
 	private String address;
-	private int postalcode;
 	private String birthDate;
+	private int postalcode;
+	
 	
 
-	public Person(String lastname, String firstname, String sex, String city, String address, int postalcode) {
-
+	public Person(String lastname, String firstname, String sex, String city, String address, int postalcode, String birthDate) throws ParseException {		
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.sex = sex;
 		this.city = city;
 		this.address = address;
 		this.postalcode = postalcode;
+		this.birthDate = birthDate;
 	}
 
 	 
@@ -80,14 +86,7 @@ public class Person {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public int getPostalcode() {
-		return postalcode;
-	}
-
-	public void setPostalcode(int postalcode) {
-		this.postalcode = postalcode;
-	}
+ 
 
 	public String getBirthDate() {
 		return birthDate;
@@ -96,5 +95,15 @@ public class Person {
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
+	
+	public int getPostalcode() {
+		return postalcode;
+	}
+
+	public void setPostalcode(int postalcode) {
+		this.postalcode = postalcode;
+	}
+
+	
 
 }
