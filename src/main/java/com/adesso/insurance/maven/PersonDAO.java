@@ -9,13 +9,16 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PersonDAO {
 
 	private final String url = "jdbc:mysql://localhost:3306/ais";
 	private final String user = "root";
 	private final String password = "Lizinaya29102022?";
+	private static final Logger LOGGER = LoggerFactory.getLogger(PersonDAO.class);
 
 	private Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(url, user, password);
@@ -33,38 +36,34 @@ public class PersonDAO {
 			stmt.setInt(6, person.getPostalcode());
 			stmt.setString(7, person.getBirthDate());
 
-			try {
-				if (ObjectIsInList(person)) {
-
-				}
-			} catch (Exception e) {
-
-				e.printStackTrace();
+			if (checkPersonInTheList(person)) {
+				stmt.executeUpdate();
+				LOGGER.info("PERSON ADDED IN THE LIST : " + person.toString());
+			} else {
+				LOGGER.warn("PERSON ALREADY EXIST IN THE LIST : " + person.toString());
 			}
 
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			LOGGER.error("MESSAGE : " + e.getMessage());
 		}
 	}
 
 	// Read
-	public Optional<Person> getPerson(String firstname) throws ParseException {
+	public Person getPerson(String firstname) throws ParseException {
+		Person person = null;
 		String query = "SELECT * FROM person WHERE firstname = ?;";
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setString(1, firstname);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
-				Person person = new Person(rs.getString("lastname"), rs.getString("firstname"), rs.getString("gender"),
+				person = new Person(rs.getString("lastname"), rs.getString("firstname"), rs.getString("gender"),
 						rs.getString("city"), rs.getString("street"), rs.getInt("postalcode"),
 						rs.getString("birthdate"));
-
-				return Optional.of(person);
-			}
+			}		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error("MESSAGE : " + e.getMessage());
 		}
-		return Optional.empty();
+		return person;
 	}
 
 	public List<Person> getAllPersons() throws ParseException {
@@ -81,13 +80,13 @@ public class PersonDAO {
 				persons.add(person);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error("MESSAGE : " + e.getMessage());
 		}
 		return persons;
 	}
 
-	public void updatePerson(Person updatedPerson) {
-		String query = "UPDATE person SET lastname = Demanou, firstname = Clemence, gender = female, city = Braunschweig, street = Gleiwitzstrasse, postacode = 38124, birthdate = 1995-02-01)";
+	public void updatePersonByFirstName(String firstname, Person updatedPerson) {
+		String query = "UPDATE person SET lastname = ?, firstname = ?, gender = ?, city = ?, street = ?, postalcode = ?, birthdate = ? WHERE firstname = ?";
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setString(1, updatedPerson.getLastname());
 			stmt.setString(2, updatedPerson.getFirstname());
@@ -96,37 +95,50 @@ public class PersonDAO {
 			stmt.setString(5, updatedPerson.getStreet());
 			stmt.setInt(6, updatedPerson.getPostalcode());
 			stmt.setString(7, updatedPerson.getBirthDate());
+			stmt.setString(8, firstname);
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error("MESSAGE : " + e.getMessage());
 		}
 	}
 
 	public void deletePerson(String firstname) {
-		String query = "DELETE FROM person WHERE firstname = ?;";
+		String query = "DELETE FROM person WHERE firstname = ?";
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setString(1, firstname);
+			Person persToDeleted = getPerson(firstname);
+			
+			LOGGER.info("PERSON WOULD BE DELETED : "+persToDeleted.toString());
 			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.info("PERSON HAS BEEN DELETED");
+		} catch (SQLException | ParseException e) {
+			LOGGER.error("MESSAGE : " + e.getMessage());
 		}
 	}
+	
 
-	public Boolean ObjectIsInList(Person pers) throws ParseException {
-		if (getAllPersons().size() <= 0) {
-			addPerson(pers);
-		} else {
+	public Boolean checkPersonInTheList(Person pers) throws ParseException {
+		
+		if (getAllPersons().isEmpty()) {
+			return true;
+		}
+
+		int count = 0;
+		if (!getAllPersons().isEmpty()) {
+			Boolean control = false;
 			for (Person actualPerson : getAllPersons()) {
 				if (actualPerson.compareTo(pers)) {
 					return false;
 				} else {
-					return true;
+					control = true;
+				}
+				count++;
+				if (getAllPersons().size() - count == 0) {
+					return control;
 				}
 			}
-
 		}
-
 		return false;
 	}
 

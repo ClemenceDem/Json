@@ -115,12 +115,14 @@ public class Person {
         return getLastname().equals(pers.lastname) &&
                getFirstname().equals(pers.firstname) &&
                getGender().equals(pers.gender) &&
-               pers.equals(city) &&
-               pers.equals(street) &&
+               getCity().equals(city) &&
+               getStreet().equals(street) &&
                getPostalcode() == postalcode &&
-               pers.equals(postalcode) ;
+               getBirthDate().equals(birthDate) ;
     }
+ 
 	}
+	
 	
 	
 	        
