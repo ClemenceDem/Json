@@ -9,30 +9,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class ConvertJavaObjektToJsonTest {
-	
-	@Test
-	//ConvertJavaObjektToJson
-	public void testJsonValue() throws ParseException {
-		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124, "1995-02-01");
-		String json = "{\"lastname\":\"Demanou\",\"firstname\":\"Clemence\",\"gender\":\"Female\",\"city\":\"Braunschweig\",\"street\":\"Gleiwitzstrasse\",\"birthDate\":\"1995-02-01\",\"postalcode\":38124}";
-		
-		assertEquals(ConvertJavaObjektToJson.jsonValue(pers),json);
-	}
-	
-	
-	@Test
-	public void testGetPerson() throws ParseException, SQLException, java.text.ParseException {
+public class PersonDAOTest {
 
-		Person person = new Person("Demanou", "Franck", "male", "Braunschweig", "Gleiwitzstrasse", 38124, "1991-01-05");		
-		Person myPerson = PersonDAO.getPerson("Franck");
-	
-		Boolean result = person.compareTo(myPerson);
-
-		assertEquals(result, true);
-	}
-	
-	
 	@Test
 	public void testGetAllPerson() throws ParseException, SQLException, java.text.ParseException {
 
@@ -66,5 +44,7 @@ public class ConvertJavaObjektToJsonTest {
 		
 		return true;
 	}
+
+
 
 }

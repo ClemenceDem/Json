@@ -15,13 +15,14 @@ import org.slf4j.LoggerFactory;
 
 public class PersonDAO {
 
-	private final String url = "jdbc:mysql://localhost:3306/ais";
-	private final String user = "root";
-	private final String password = "Lizinaya29102022?";
+	private final static String URL = "jdbc:mysql://localhost:3306/ais";
+	private final static String USER = "root";
+	private final static String PASSWORD = "Lizinaya29102022?";
 	private static final Logger LOGGER = LoggerFactory.getLogger(PersonDAO.class);
+	
 
-	private Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password);
+	public static Connection getConnection() throws SQLException {
+		return DriverManager.getConnection(URL, USER, PASSWORD);
 	}
 
 	public void addPerson(Person person) throws ParseException {
@@ -48,8 +49,8 @@ public class PersonDAO {
 		}
 	}
 
-	// Read
-	public Person getPerson(String firstname) throws ParseException {
+	
+	public static Person getPerson(String firstname) throws ParseException {
 		Person person = null;
 		String query = "SELECT * FROM person WHERE firstname = ?;";
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -66,7 +67,7 @@ public class PersonDAO {
 		return person;
 	}
 
-	public List<Person> getAllPersons() throws ParseException {
+	public static List<Person> getAllPersons() throws ParseException {
 		List<Person> persons = new ArrayList<>();
 		String query = "SELECT * FROM person";
 		try (Connection conn = getConnection();
@@ -118,7 +119,7 @@ public class PersonDAO {
 	}
 	
 
-	public Boolean checkPersonInTheList(Person pers) throws ParseException {
+	private Boolean checkPersonInTheList(Person pers) throws ParseException {
 		
 		if (getAllPersons().isEmpty()) {
 			return true;

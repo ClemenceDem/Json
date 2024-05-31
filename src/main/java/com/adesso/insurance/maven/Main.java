@@ -52,9 +52,9 @@ public class Main {
 		//personDAO.updatePersonByFirstName("Franck", fr);
 		
 
-		LOGGER.info("FOUND PERSON : " + personDAO.getPerson("Clemence").toString());
+		LOGGER.info("FOUND PERSON : " + PersonDAO.getPerson("Clemence").toString());
 		
-		personDAO.deletePerson("Franck");
+		//personDAO.deletePerson("Franck");
 	}
 
 }
