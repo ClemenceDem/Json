@@ -1,4 +1,4 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,27 +8,53 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adesso.insurance.config.ConfigLoader;
+
 public class PersonDAO {
 
-	private final static String URL = "jdbc:mysql://localhost:3306/ais";
-	private final static String USER = "root";
-	private final static String PASSWORD = "Lizinaya29102022?";
-	private static final Logger LOGGER = LoggerFactory.getLogger(PersonDAO.class);
-	
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonDAO.class);
+    /*
+     * private final static String URL = "jdbc:mysql://localhost:3306/ais"; private final static String USER = "root"; private final static String
+     * PASSWORD = "Lizinaya29102022?";
+     */
+    private static EntityManagerFactory entityManagerFactory;
 
-	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(URL, USER, PASSWORD);
-	}
+    static {
+        Map<String, String> properties = new HashMap<>();
+        properties.put("javax.persistence.jdbc.URL", ConfigLoader.getProperty("jdbc:mysql://localhost:3306/ais"));
+        properties.put("javax.persistence.jdbc.USER", ConfigLoader.getProperty("root"));
+        properties.put("javax.persistence.jdbc.PASSWORD", ConfigLoader.getProperty("Lizinaya29102022?"));
+
+        entityManagerFactory = Persistence.createEntityManagerFactory("persistence", properties);
+    }
+
+    public static EntityManager getEntityManager() {
+        return entityManagerFactory.createEntityManager();
+    }
+
+    public static Connection getConnection() throws SQLException {
+
+        String key = null;
+        return DriverManager.getConnection(ConfigLoader.getProperty(key));
+    }
+
+
 
 	public void addPerson(Person person) throws ParseException {
 
 		String query = "INSERT INTO person (lastname,firstname,gender,city,street,postalcode,birthdate) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 			stmt.setString(1, person.getLastname());
 			stmt.setString(2, person.getFirstname());
 			stmt.setString(3, person.getGender());
@@ -119,7 +145,7 @@ public class PersonDAO {
 	}
 	
 
-	private Boolean checkPersonInTheList(Person pers) throws ParseException {
+	private boolean checkPersonInTheList(Person pers) throws ParseException {
 		
 		if (getAllPersons().isEmpty()) {
 			return true;

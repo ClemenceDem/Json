@@ -1,10 +1,12 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.convert;
 
 import java.io.FileNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.adesso.insurance.dao.Person;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;

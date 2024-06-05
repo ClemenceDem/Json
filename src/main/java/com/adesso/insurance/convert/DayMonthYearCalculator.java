@@ -1,4 +1,4 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.convert;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -22,7 +22,7 @@ public class DayMonthYearCalculator {
 	
     
 	
-	public static LocalDate DayMonthYearValue(String date) {
+    public static LocalDate dayMonthYearValue(String date) {
 
 		if (date.contains(".") || date.contains("/")) {
 			date = date.replaceAll("[./]", "-");

@@ -1,6 +1,6 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.convert.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import com.adesso.insurance.convert.ConvertJavaObjektToJson;
+import com.adesso.insurance.dao.Person;
+import com.adesso.insurance.dao.PersonDAO;
 
 public class ConvertJavaObjektToJsonTest {
 	
@@ -27,9 +31,9 @@ public class ConvertJavaObjektToJsonTest {
 		Person person = new Person("Demanou", "Franck", "male", "Braunschweig", "Gleiwitzstrasse", 38124, "1991-01-05");		
 		Person myPerson = PersonDAO.getPerson("Franck");
 	
-		Boolean result = person.compareTo(myPerson);
-
-		assertEquals(result, true);
+		boolean result = person.compareTo(myPerson);
+		
+		assertTrue(result);
 	}
 	
 	
@@ -47,13 +51,13 @@ public class ConvertJavaObjektToJsonTest {
 		
 		List<Person> result = PersonDAO.getAllPersons();
 		
-		Boolean comp = compareListByPosition(persons, result);
+		boolean comp = compareListByPosition(persons, result);
 
-		assertEquals(comp, true);
+		assertTrue(comp);
 	}
 	
 	
-	private Boolean compareListByPosition(List<Person> pers1, List<Person> pers2) {
+	private boolean compareListByPosition(List<Person> pers1, List<Person> pers2) {
 		if (pers1.size() != pers2.size()) {
 			return false;
 		}

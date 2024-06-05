@@ -1,4 +1,4 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.optionvalidierung;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -10,9 +10,9 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OptionValiedierung {
+public class OptionValidierung {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(OptionValiedierung.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(OptionValidierung.class);
 	private static final String PARAM_START = "start";
 	private static final String PARAM_STARTS = "s";
 	private static String pathfile = null;

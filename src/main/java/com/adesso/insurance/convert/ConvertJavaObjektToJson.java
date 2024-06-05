@@ -1,5 +1,6 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.convert;
 
+import com.adesso.insurance.dao.Person;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

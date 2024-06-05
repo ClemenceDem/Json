@@ -12,9 +12,9 @@
         <class>com.ing.kc.domain.Cursus</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cursistdb?serverTimezone=UTC" />
-            <property name="javax.persistence.jdbc.user" value="username" />
-            <property name="javax.persistence.jdbc.password" value="password" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ais" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="Lizinaya29102022" />
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>

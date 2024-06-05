@@ -1,19 +1,12 @@
-package com.adesso.insurance.maven;
+package com.adesso.insurance.dao;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Logger;
 
 @Entity
 public class Person {
-	
-	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(Person.class);
 
 	private String lastname;
 	private String firstname;
@@ -34,8 +27,6 @@ public class Person {
 		this.birthDate = birthDate;
 	}
 
-	public Person() {
-	}
 
 	public Person(String lastname, String firstname) {
 		this.lastname = lastname;
