@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.adesso.insurance.dao.Person;
+import com.adesso.insurance.entity.Person;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;

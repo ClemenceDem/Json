@@ -1,6 +1,4 @@
-package com.adesso.insurance.dao;
-
-import java.text.ParseException;
+package com.adesso.insurance.entity;
 
 import javax.persistence.Entity;
 
@@ -8,6 +6,7 @@ import javax.persistence.Entity;
 @Entity
 public class Person {
 
+    private int id;
 	private String lastname;
 	private String firstname;
 	private String gender;
@@ -16,8 +15,9 @@ public class Person {
 	private String birthDate;
 	private int postalcode;
 
-	public Person(String lastname, String firstname, String gender, String city, String street, int postalcode,
-			String birthDate) throws ParseException {
+    public Person(int id, String lastname, String firstname, String gender, String city, String street, int postalcode,
+            String birthDate) {
+        this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.gender = gender;
@@ -28,10 +28,13 @@ public class Person {
 	}
 
 
-	public Person(String lastname, String firstname) {
-		this.lastname = lastname;
-		this.firstname = firstname;
-	}
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 	public String getLastname() {
 		return lastname;
@@ -91,7 +94,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [lastname=" + lastname + ", firstname=" + firstname + ", gender=" + gender + ", city=" + city
+        return "Person [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", gender=" + gender + ", city=" + city
 				+ ", street=" + street + ", postalcode=" + postalcode + ", birthDate=" + birthDate + "]";
 	}
 
@@ -103,7 +106,8 @@ public class Person {
         	return true; // Vérifie si les objets sont identiques
         if (pers == null || getClass() != pers.getClass())
         	return false; // Vérifie si l'objet est du même type
-        return getLastname().equals(pers.lastname) &&
+        return getId() == (pers.id) &&
+                getLastname().equals(pers.lastname) &&
                getFirstname().equals(pers.firstname) &&
                getGender().equals(pers.gender) &&
                getCity().equals(city) &&

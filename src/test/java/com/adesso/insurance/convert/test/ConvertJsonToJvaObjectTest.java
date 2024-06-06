@@ -8,7 +8,7 @@ import java.text.ParseException;
 import org.junit.Test;
 
 import com.adesso.insurance.convert.ConvertJsonToJvaObject;
-import com.adesso.insurance.dao.Person;
+import com.adesso.insurance.entity.Person;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class ConvertJsonToJvaObjectTest {
@@ -17,7 +17,7 @@ public class ConvertJsonToJvaObjectTest {
 	//ConvertJsonToJvaObject
 	public void testGetJavaObject() throws JsonProcessingException, IOException, ParseException   {
         String pathfile = "src/main/resources/Person.json";
-		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124, "1995-02-01");
+        Person pers = new Person(1, "Demanou", "Clemence", "Female", "Braunschweig", "Gleiwitzstrasse", 38124, "1995-02-01");
 		
 		assertEquals(ConvertJsonToJvaObject.javaObjectValue(pathfile).getStreet(), pers.getStreet());
 	}

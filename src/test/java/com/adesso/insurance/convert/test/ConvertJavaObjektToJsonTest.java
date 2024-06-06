@@ -1,6 +1,7 @@
 package com.adesso.insurance.convert.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -10,15 +11,15 @@ import java.util.List;
 import org.junit.Test;
 
 import com.adesso.insurance.convert.ConvertJavaObjektToJson;
-import com.adesso.insurance.dao.Person;
 import com.adesso.insurance.dao.PersonDAO;
+import com.adesso.insurance.entity.Person;
 
 public class ConvertJavaObjektToJsonTest {
 	
 	@Test
 	//ConvertJavaObjektToJson
 	public void testJsonValue() throws ParseException {
-		Person pers = new Person("Demanou","Clemence","Female","Braunschweig","Gleiwitzstrasse", 38124, "1995-02-01");
+        Person pers = new Person(1, "Demanou", "Clemence", "Female", "Braunschweig", "Gleiwitzstrasse", 38124, "1995-02-01");
 		String json = "{\"lastname\":\"Demanou\",\"firstname\":\"Clemence\",\"gender\":\"Female\",\"city\":\"Braunschweig\",\"street\":\"Gleiwitzstrasse\",\"birthDate\":\"1995-02-01\",\"postalcode\":38124}";
 		
 		assertEquals(ConvertJavaObjektToJson.jsonValue(pers),json);
@@ -28,8 +29,8 @@ public class ConvertJavaObjektToJsonTest {
 	@Test
 	public void testGetPerson() throws ParseException, SQLException, java.text.ParseException {
 
-		Person person = new Person("Demanou", "Franck", "male", "Braunschweig", "Gleiwitzstrasse", 38124, "1991-01-05");		
-		Person myPerson = PersonDAO.getPerson("Franck");
+        Person person = new Person(3, "Demanou", "Franck", "male", "Braunschweig", "Gleiwitzstrasse", 38124, "1991-01-05");
+        Person myPerson = PersonDAO.getPerson(3);
 	
 		boolean result = person.compareTo(myPerson);
 		
@@ -41,9 +42,9 @@ public class ConvertJavaObjektToJsonTest {
 	public void testGetAllPerson() throws ParseException, SQLException, java.text.ParseException {
 
 		List<Person> persons = new ArrayList<>();
-		Person person = new Person("Demanou", "Franck", "male", "Braunschweig", "Gleiwitzstrasse", 38124, "1991-01-05");		
-		Person pers = new Person("Demanou", "Clemence", "female", "Braunschweig", "Gleiwitzstrasse", 38124, "1992-03-21");
-		Person liz = new Person("Demanou", "Inaya", "female", "Braunschweig", "Gleiwitzstrasse", 38124, "2022-10-29");
+        Person person = new Person(2, "Demanou", "Franck", "male", "Braunschweig", "Gleiwitzstrasse", 38124, "1991-01-05");
+        Person pers = new Person(1, "Demanou", "Clemence", "female", "Braunschweig", "Gleiwitzstrasse", 38124, "1992-03-21");
+        Person liz = new Person(3, "Demanou", "Inaya", "female", "Braunschweig", "Gleiwitzstrasse", 38124, "2022-10-29");
 		
 		persons.add(pers);
 		persons.add(liz);
